@@ -1,0 +1,419 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{bookmark}
+\usepackage{listing}
+%\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{svg}
+\usepackage{longtable}
+\usepackage[title,titletoc]{appendix}
+\usepackage[UKenglish]{isodate}
+\usepackage{derivative}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{empheq}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\cleanlookdateon% Remove ordinal day reference
+\lstset{style=mystyle}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\pagestyle{fancyplain}
+\headheight 35pt
+\rhead{\theauthor\\\today}               
+\chead{\textbf{\Large Homework \homeworknumber{}}}
+\lhead{\coursenumber \\ \coursename{}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+\renewcommand{\headrulewidth}{2pt}
+
+% Edit these as appropriate
+\author{Evan Burke}
+\newcommand\homeworknumber{1} 
+\title{Homework \homeworknumber}
+\newcommand\coursenumber{AEE 546}
+\newcommand\coursename{Finite Element Analysis I}
+\newcommand\instructor{Dr. Thomas Whitney}
+\newcommand\studentID{101318838}   
+     
+%\newcommand\Name{\author}                
+
+\begin{document}
+	\input{title/title.tex}
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\section*{Problem 1}
+	In a three-node triangle, field quantity $\phi$ can be written as $\phi = a_1 + a_2x + a_3y$, where the $a_i$ are generalized d.o.f. For the triangles shown, express $\phi$ in the form $\phi = f_1\phi_1 + f_2\phi_2 + f_3\phi_3$, where the $f_i$ are the functions of $x, y, a, \mathrm{and} \ b$.
+	\addcontentsline{toc}{section}{Problem 1}
+	\begin{enumerate}[label=(\alph*)]
+		\item 
+		\addcontentsline{toc}{subsection}{(a)}
+
+		\begin{enumerate}[label=\arabic*.]
+			
+			\item{\textbf{Givens}} \\
+			$\phi = \phi_1 \ \mathrm{at} \ x = y = 0$\\ 
+			$\phi = \phi_2 \ \mathrm{at} \ x = a \ \mathrm{and} \ y = 0$\\
+			$\phi = \phi_3 \ \mathrm{at} \ x = 0 \ \mathrm{and} \ y = b$\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+				
+			\item{\textbf{Solution}} \\
+			The field quantity $\phi$ is shown below, expressed generally and at the boundary conditions (BCs) imposed by the nodes of the triangle.
+			\begin{align*}
+				\phi &= a_1 + a_2x + a_3y\\
+				\phi_1 &= a_1 + a_2(0) + a_3(0)\\
+				\phi_2 &= a_1 + a_2(a) + a_3(0)\\
+				\phi_3 &= a_1 + a_2(0) + a_3(b)		
+			\end{align*}
+			The BCs allow us to express the equations for $\phi$ in matrix form:
+			\begin{equation*}
+				\left\{\phi\right\} = \left[B\right]\left\{a\right\}
+			\end{equation*}
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 \\ 1 & a & 0 \\ 1 & 0 & b]
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3
+				\end{Bmatrix}
+			\end{equation*}
+			To solve for $a_i$, we invert the matrix of coefficients, $B$, using MATLAB.
+			\begin{equation*}
+				\left\{a\right\} = \left[B\right]^{-1}\left\{\phi\right\}
+			\end{equation*}
+			\begin{equation*}
+				\left[B\right]^{-1} =  \mqty[1 & 0 & 0 \\ 1 & a & 0 \\ 1 & 0 & b]^{-1} \xRightarrow{MATLAB} \left[B\right]^{-1} = \mqty[1 & 0 & 0 \\ -1/a & 1/a & 0 \\ -1/b & 0 & 1/b]
+			\end{equation*}
+			Substituting $B^{-1}$ into the equation and solving:
+			\begin{equation*}
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 \\ -1/a & 1/a & 0 \\ -1/b & 0 & 1/b] 
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3
+				\end{Bmatrix}
+			\end{equation*}
+			\begin{equation*}
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3
+				\end{Bmatrix}
+				= 
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2/a - \phi_1/a \\ \phi_3/b - \phi_1/b
+				\end{Bmatrix}
+			\end{equation*}
+			We can now rewrite the original matrix equation, replacing $a_i$ with the values we have solved for in terms of $\phi, a, \textrm{and} \ b$.
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 \\ 1 & a & 0 \\ 1 & 0 & b]
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2/a - \phi_1/a \\ \phi_3/b - \phi_1/b
+				\end{Bmatrix}
+			\end{equation*}
+			Finally, we can express $\phi$ in terms of $f$ and $\phi_i$.
+			\begin{equation*}
+				\phi = f_1\phi_1 + f_2\phi_2 + f_3\phi_3
+			\end{equation*}			
+			Beginning with the form $\phi = a_1 + a_2x + a_3y$ and rearranging to isolate the $\phi_i$:
+			\begin{align*}
+				\phi(x,y) &= \phi_1 + (\phi_2/a - \phi_1/a)x + ( \phi_3/b - \phi_1/b)y\\
+				\phi(x,y) &= \phi_1 + \phi_2x/a - \phi_1x/a + \phi_3y/b - \phi_1y/b\\
+				\phi(x,y) &=  (1 - x/a - y/b)\phi_1 + (x/a) \phi_2 + (y/b)\phi_3
+			\end{align*}
+			Checking to ensure consistency with the BCs:
+			\begin{align*}
+				\phi(0,0) &= (1 - 0/a - 0/b)\phi_1 + (0/a) \phi_2 + (0/b)\phi_3 = \phi_1 \checkmark \\
+				\phi(a,0) &= (1 - a/a - 0/b)\phi_1 + (a/a) \phi_2 + (0/b)\phi_3 = \phi_2 \checkmark\\
+				\phi(0,b) &= (1 - 0/a - b/b)\phi_1 + (0/a) \phi_2 + (b/b)\phi_3 = \phi_3 \checkmark
+			\end{align*}
+			The field variable $\phi$ has been expressed in the form $\phi = f_1\phi_1 + f_2\phi_2 + f_3\phi_3$:
+			\begin{equation*}
+				\boxed{\phi(x,y) =  \left(1 - \frac{x}{a} - \frac{y}{b}\right)\phi_1 + \left(\frac{x}{a}\right) \phi_2 +\left(\frac{y}{b}\right)\phi_3}
+			\end{equation*}
+			\addcontentsline{toc}{subsubsection}{Solution}
+
+		\end{enumerate}
+		\newpage
+		\item 
+		\begin{enumerate}[label=\arabic*.]
+		\addcontentsline{toc}{subsection}{(b)}
+		
+			\item{\textbf{Givens}} \\
+			$\phi = \phi_1 \ \mathrm{at} \ x = y = 0$\\ 
+			$\phi = \phi_2 \ \mathrm{at} \ x = 2a \ \mathrm{and} \ y = 0$\\
+			$\phi = \phi_3 \ \mathrm{at} \ x = a \ \mathrm{and} \ y = b$\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			
+			\item{\textbf{Solution}} \\
+			The field quantity $\phi$ is shown below, expressed generally and at the boundary conditions (BCs) imposed by the nodes of the triangle.
+			\begin{align*}
+				\phi &= a_1 + a_2x + a_3y\\
+				\phi_1 &= a_1 + a_2(0) + a_3(0)\\
+				\phi_2 &= a_1 + a_2(2a) + a_3(0)\\
+				\phi_3 &= a_1 + a_2(a) + a_3(b)		
+			\end{align*}
+			The BCs allow us to express the equations for $\phi$ in matrix form:
+			\begin{equation*}
+				\left\{\phi\right\} = \left[B\right]\left\{a\right\}
+			\end{equation*}
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 \\ 1 & 2a & 0 \\ 1 & a & b]
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3
+				\end{Bmatrix}
+			\end{equation*}
+			To solve for $a_i$, we invert the matrix of coefficients, $B$, using MATLAB.
+			\begin{equation*}
+				\left\{a\right\} = \left[B\right]^{-1}\left\{\phi\right\}
+			\end{equation*}
+			\begin{equation*}
+				\left[B\right]^{-1} =  \mqty[1 & 0 & 0 \\ 1 & 2a & 0 \\ 1 & a & b]^{-1} \xRightarrow{MATLAB} \left[B\right]^{-1} = \mqty[1 & 0 & 0 \\ -1/2a & 1/2a & 0 \\ -1/2b & -1/2b & 1/b]
+			\end{equation*}
+			Substituting $B^{-1}$ into the equation and solving:
+			\begin{equation*}
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 \\ -1/2a & 1/2a & 0 \\ -1/2b & -1/2b & 1/b]
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3
+				\end{Bmatrix}
+			\end{equation*}
+			\begin{equation*}
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3
+				\end{Bmatrix}
+				= 
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2/2a - \phi_1/2a \\ \phi_3/b - \phi_2/2b - \phi_1/2b
+				\end{Bmatrix}
+			\end{equation*}
+			We can now rewrite the original matrix equation, replacing $a_i$ with the values we have solved for in terms of $\phi, a, \textrm{and} \ b$.
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 \\ 1 & a & 0 \\ 1 & 0 & b]
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2/2a - \phi_1/2a \\ \phi_3/b - \phi_2/2b - \phi_1/2b
+				\end{Bmatrix}
+			\end{equation*}
+
+			Finally, we can express $\phi$ in terms of $f$ and $\phi_i$.
+			\begin{equation*}
+				\phi = f_1\phi_1 + f_2\phi_2 + f_3\phi_3
+			\end{equation*}			
+			Beginning with the form $\phi = a_1 + a_2x + a_3y$ and rearranging to isolate the $\phi_i$:
+			\begin{align*}
+				\phi(x,y) &= \phi_1 + (\phi_2/2a - \phi_1/2a)x + ( \phi_3/b - \phi_2/2b - \phi_1/2b)y\\
+				\phi(x,y) &= \phi_1 -  \phi_1x/2a - \phi_1y/2b + \phi_2x/2a - \phi_2y/2b + \phi_3y/b\\
+				\phi(x,y) &=  (1 - x/2a - y/2b)\phi_1 + (x/2a-y/2b) \phi_2 + (y/b)\phi_3
+			\end{align*}
+			Checking to ensure consistency with the BCs:
+			\begin{align*}
+				\phi(0,0) &=  (1 - 0/2a - 0/2b)\phi_1 + (0/2a-0/2b) \phi_2 + (0/b)\phi_3 = \phi_1 \checkmark \\
+				\phi(2a,0) &= (1 - 2a/2a - 0/2b)\phi_1 + (2a/2a-0/2b) \phi_2 + (0/b)\phi_3 = \phi_2 \checkmark\\
+				\phi(a,b) &=  (1 - a/2a - b/2b)\phi_1 + (a/2a-b/2b) \phi_2 + (b/b)\phi_3 = \phi_3 \checkmark
+			\end{align*}
+			The field variable $\phi$ has been expressed in the form $\phi = f_1\phi_1 + f_2\phi_2 + f_3\phi_3$:
+			\begin{equation*}
+				\boxed{\phi(x,y) =  \left(1 - \frac{x}{2a} - \frac{y}{2b}\right)\phi_1 + \left(\frac{x}{2a}-\frac{y}{2b}\right) \phi_2 +\left(\frac{y}{b}\right)\phi_3}
+			\end{equation*}
+			\addcontentsline{toc}{subsubsection}{Solution}
+		\end{enumerate}
+		
+	\end{enumerate}
+
+
+	\newpage
+	
+	\section*{Problem 2}
+	For the plane quadrilateral element shown, imagine that field quantity $\phi$ has the form $\phi = a_1 + a_2x + a_3y + a_4xy$ where the $a_i$ are generalized d.o.f. How does $\phi$ vary with $x$ or $y$ along each side? Do you think this element will be compatible with neighboring elements that may be attached to it?
+	\addcontentsline{toc}{section}{Problem 2}
+	
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}\\
+			$\phi = \phi_1 \ \mathrm{at} \ x = y = 0$\\ 
+			$\phi = \phi_2 \ \mathrm{at} \ x = L_1 \ \mathrm{and} \ y = 0$\\
+			$\phi = \phi_3 \ \mathrm{at} \ x = L_1 \ \mathrm{and} \ y = L_2$\\
+			$\phi = \phi_4 \ \mathrm{at} \ x = (L_1-L3) \ \mathrm{and} \ y = L_2$\\ \\
+			\textit{Note: $L_1$, $L_2$, $L_3$ are arbitrary lengths assigned to the x-coordinate of Node 1, the y coordinate of Node 2, and the difference in x between Nodes 3 and 4, respectively.}
+			\addcontentsline{toc}{subsubsection}{Givens}\\
+
+			\item{\textbf{Solution}}\\
+				The field quantity $\phi$ is shown below, expressed generally and at the boundary conditions (BCs) imposed by the nodes of the quadrilateral element.
+			\begin{align*}
+				\phi &= a_1 + a_2x + a_3y + a_4xy\\
+				\phi_1 &= a_1 + a_2(0) + a_3(0) + a_4(0)(0)\\
+				\phi_2 &= a_1 + a_2(L_1) + a_3(0) + a_4(L_1)(0)\\
+				\phi_3 &= a_1 + a_2(L_1) + a_3(L_2) + a_4(L_1)(L_2)\\
+				\phi_4 &= a_1 + a_2(L_1-L_3) + a_3(L_2) + a_4(L_1-L_3)(L_2)
+			\end{align*}
+			The BCs allow us to express the equations for $\phi$ in matrix form:
+			\begin{equation*}
+				\left\{\phi\right\} = \left[B\right]\left\{a\right\}
+			\end{equation*}
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 & 0 \\ 1 & L_1 & 0 & 0 \\ 1 & L_1 & L_2 & L_1L_2\\ 1 & (L_1-L_3) & L_2 & (L_1-L_3)L_2 ]
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3 \\ a_4
+				\end{Bmatrix}
+			\end{equation*}
+			To solve for $a_i$, we invert the matrix of coefficients, $B$, using MATLAB.
+			\begin{equation*}
+				\left\{a\right\} = \left[B\right]^{-1}\left\{\phi\right\}
+			\end{equation*}
+			\begin{equation*}
+				\left[B\right]^{-1} =  \mqty[1 & 0 & 0 & 0 \\ 1 & L_1 & 0 & 0 \\ 1 & L_1 & L_2 & L_1L_2\\ 1 & (L_1-L_3) & L_2 & (L_1-L_3)L_2 ]^{-1} \xRightarrow{MATLAB} \left[B\right]^{-1}% = \mqty[1 & 0 & 0 & 0 \\ -1/L_1 & 1/L_1 & 0 & 0 \\ -1/L_2 & 0 & -(L_1-L_3)/(L_2L_3) & L_1/(L_2L_3)\\ 1/(L_1L_2) & -1/(L_1L_2) & 1/(L_2L_3) & -1/(L_2L3)]
+			\end{equation*}
+			\begin{equation*}
+				\left[B\right]^{-1} = \mqty[1 & 0 & 0 & 0 \\ -1/L_1 & 1/L_1 & 0 & 0 \\ -1/L_2 & 0 & -(L_1-L_3)/(L_2L_3) & L_1/(L_2L_3)\\ 1/(L_1L_2) & -1/(L_1L_2) & 1/(L_2L_3) & -1/(L_2L3)]
+			\end{equation*}
+		
+			Substituting $B^{-1}$ into the equation and solving:
+			\begin{equation*}
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3 \\a_4
+				\end{Bmatrix}
+				=\mqty[1 & 0 & 0 & 0 \\ -1/L_1 & 1/L_1 & 0 & 0 \\ -1/L_2 & 0 & -(L_1-L_3)/(L_2L_3) & L_1/(L_2L_3)\\ 1/(L_1L_2) & -1/(L_1L_2) & 1/(L_2L_3) & -1/(L_2L3)] 
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+				\end{Bmatrix}
+			\end{equation*}
+			\begin{equation*}
+				\begin{Bmatrix}
+					a_1 \\ a_2 \\ a_3 \\ a_4
+				\end{Bmatrix}
+				= 
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2/L_1 - \phi_1/L_1 \\ \phi_4L_1/(L_2L_3) - \phi_1/L_2 - \phi_3(L_1-L_3)/(L_2L_3) \\ \phi_1/(L_1L_2) - \phi_2/(L_1L_2) + \phi_3 /(L_2L_3) - \phi_4/(L_2L_3)
+				\end{Bmatrix}
+			\end{equation*}
+			We can now rewrite the original matrix equation, replacing $a_i$ with the values we have solved for in terms of $\phi, a, \textrm{and} \ b$.
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+				\end{Bmatrix}
+				= \mqty[1 & 0 & 0 & 0 \\ 1 & L_1 & 0 & 0 \\ 1 & L_1 & L_2 & L_1L_2\\ 1 & (L_1-L_3) & L_2 & (L_1-L_3)L_2 ]
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2/L_1 - \phi_1/L_1 \\ \phi_4L_1/(L_2L_3) - \phi_1/L_2 - \phi_3(L_1-L_3)/(L_2L_3) \\ \phi_1/(L_1L_2) - \phi_2/(L_1L_2 )+ \phi_3 /(L_2L_3) - \phi_4/(L_2L_3)
+				\end{Bmatrix}
+			\end{equation*}
+			MATLAB verifies that the values of $a_i$ are consistent with the initial BCs.
+			\begin{equation*}
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+				\end{Bmatrix}
+				=
+				\begin{Bmatrix}
+					\phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+				\end{Bmatrix}
+				\checkmark
+			\end{equation*}
+			
+			Revisiting the form $\phi = a_1 + a_2x + a_3y + a_4xy$:
+			\begin{empheq}[box=\fbox]{align}
+				\phi = \phi_1 + (\phi_2/L_1 - \phi_1/L_1)x &+ (\phi_4L_1/(L_2L_3) - \phi_1/L_2 - \phi_3(L_1-L_3)/(L_2L_3))y\nonumber\\
+				 &+ (\phi_1/L_1L_2 - \phi_2/L_1L_2 + \phi_3 /L_2L_3 - \phi_4/L_2L_3)xy\nonumber
+			\end{empheq}
+			We now have solved for the equations defining the variation of the field variable $\phi$ along the sides of the quadrilateral element. Along the side defined by Nodes 1 and 2, $\phi$ varies strictly with $x$. Along the side defined by Nodes 2 and 3, $\phi$ varies strictly with $y$. Along the top side defined by Nodes 3 and 4, $\phi$ varies strictly with $x$ again. Finally, on the diagonal side defined by Nodes 4 and 1, $\phi$ varies with both $x$ and $y$. This element is likely to be compatible with elements neighboring it because of the consistency of the field variable $\phi$ along all four edges. There is a defined BC for each side that another element would share. Because there are no inconsistencies in the formulation of the shape functions, this is a viable element for other quadrilateral elements to share connectivity with. 
+			\addcontentsline{toc}{subsubsection}{Solution}
+
+		\end{enumerate}
+		
+	\newpage
+	
+	\section*{Problem 3}
+	The sketch shows a propped cantilever beam under uniformly distributed load, as it might be sketched in a book about mechanics of materials. What idealizations of reality may have been introduced in arriving at this model?
+	\addcontentsline{toc}{section}{Problem 3}
+
+		\begin{enumerate}[label=\arabic*.]
+
+			\item{\textbf{Discussion}}\\
+			The cantilever beam under distributed loading likely assumes an isotropic, linear elastic material with a uniform distribution of mass. In addition, The boundary conditions (at the wall and on the end of the beam) are idealized as perfect according to the specific implications of the illustrated BCs, limiting the degrees of freedom of the beam's motion. Small angle assumption will be important when formulating a solution to the problem to simplify the underlying mechanics. Other assumptions that are often intuitive, but are not explicitly shown, are that the beam is not moving, rotating, vibrating, being heated, submerged in a moving fluid, etc. Although these are not usually assumptions that we state, they are generally underlying 99.9\% of the problems we solve for a cantilever beam. 
+			\addcontentsline{toc}{subsubsection}{Discussion}
+
+		\end{enumerate}
+	
+	\newpage
+	
+	\section*{Problem 4}
+	The sketch shows the cross section of a concrete gravity dam. The $\nabla$ symbols indicate water surfaces. Imagine that stress analysis for loading due to hydraulic pressure is required. Has anything of importance been omitted from the sketch? What considerations influence the mathematical model devised? What additional information will be needed before undertaking numerical analysis?
+	\addcontentsline{toc}{section}{Problem 4}
+	
+	\begin{enumerate}[label=\arabic*.]
+		
+		\item{\textbf{Discussion}}\\
+		Some important information that has been omitted from the sketch includes any dimensions, initial conditions of the water and air ($T\,,p$), the material properties of the concrete (can it be considered isotropic?), and the boundary conditions applicable to the interface between the concrete and the rock. Before undertaking any kind of numerical analysis, the above information and more is required to even begin formulating the proper assumptions. Another consideration influencing the mathematical model is the safety factor and accuracy required for the analysis --- if the dam is holding back a river that would otherwise flood a city, a detailed and rigorous modeling of the system is required. More detailed evaluation of the dam would involve fatigue analysis and require a history of the dam, beginning with its construction and including the historical water levels both above and below the dam. If water levels are approximately constant then some simplifications can be made when examining the time history of the dam's hydraulic loading. External factors, like flooding or droughts, are also relevant when considering the dam in the context of the surrounding environment. Concrete is likely to not be considered isotropic, so a validated model for the formulation of concrete used in the dam is also critical for analysis. 
+		\addcontentsline{toc}{subsubsection}{Discussion}
+
+		
+	\end{enumerate}
+
+	\newpage
+	
+	\begin{appendices}
+		\section{Problem 1a MATLAB Code}
+		\lstinputlisting[language=MATLAB,firstline=1,lastline=19]{../MATLAB/homework_1.m}
+		\newpage
+		\section{Problem 1b MATLAB Code}
+		\lstinputlisting[language=MATLAB,firstline=21,lastline=40]{../MATLAB/homework_1.m}
+		\newpage
+		\section{Problem 2 MATLAB Code}
+		\lstinputlisting[language=MATLAB,firstline=42]{../MATLAB/homework_1.m}
+		\end{appendices}
+	
+\end{document}

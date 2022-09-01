@@ -1,0 +1,17 @@
+\contentsline {section}{Problem 1}{2}{section*.2}%
+\contentsline {subsection}{(a)}{2}{Item.1}%
+\contentsline {subsubsection}{Givens}{2}{Item.2}%
+\contentsline {subsubsection}{Solution}{3}{Item.3}%
+\contentsline {subsection}{(b)}{4}{Item.4}%
+\contentsline {subsubsection}{Givens}{4}{Item.5}%
+\contentsline {subsubsection}{Solution}{5}{Item.6}%
+\contentsline {section}{Problem 2}{6}{section*.3}%
+\contentsline {subsubsection}{Givens}{6}{Item.7}%
+\contentsline {subsubsection}{Solution}{7}{Item.8}%
+\contentsline {section}{Problem 3}{8}{section*.4}%
+\contentsline {subsubsection}{Discussion}{8}{Item.9}%
+\contentsline {section}{Problem 4}{9}{section*.5}%
+\contentsline {subsubsection}{Discussion}{9}{Item.10}%
+\contentsline {section}{Appendix \numberline {A}Problem 1a MATLAB Code}{10}{appendix.1.A}%
+\contentsline {section}{Appendix \numberline {B}Problem 1b MATLAB Code}{11}{appendix.1.B}%
+\contentsline {section}{Appendix \numberline {C}Problem 2 MATLAB Code}{12}{appendix.1.C}%
