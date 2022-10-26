@@ -1,0 +1,130 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\problem{1}
+
+Instead of the linear shape functions for a 1D bar element, the following shape function shave been proposed for an element with two nodes:
+
+\[
+    N_1 = \frac{-x(1-x)}{2} \quad \quad N_2 = \frac{x(1+x)}{2}
+\]
+
+The resulting displacement field is \(u = N_1d_1 + N_2d_2\).
+
+\begin{enumerate}[label=\alph*)]
+    \item Develop the relation: \(\varepsilon = [B]\{{d}\}\). That is, find the \([B]\) matrix in terms of \(x\).
+    \item Develop the stiffness matrix, \([K]\).
+    \item Are these valid shape functions? Why or why not?
+\end{enumerate}
+
+\problempart{a}
+
+\solution{}
+
+\[
+    \{u\} = [N]\{d\}
+\]
+
+\[
+    \{\varepsilon\} = [\partial]\{u\}
+\]
+
+\[
+    \{\varepsilon\} = [\partial][N]\{d\}
+\]
+
+\[
+    [B] = [\partial][N]
+\]
+
+\[
+    \{\varepsilon\} = [B]\{d\}
+\]
+
+\[
+    [N] = [N_1\, N_2] = \mqty[\frac{-x(1-x)}{2} & \frac{x(1+x)}{2}]
+\]
+
+\[
+    [B] = [\pdv{x}]\mqty[\frac{-x(1-x)}{2} & \frac{x(1+x)}{2}]
+\]
+
+\[
+    \boxed{
+    [B] = \mqty[x - \frac{1}{2} & x + \frac{1}{2}]
+    }
+\]
+
+\[
+    \{\varepsilon\} = \mqty[x - \frac{1}{2} & x + \frac{1}{2}]
+    \begin{Bmatrix}
+        d_1\\d_2
+    \end{Bmatrix}
+\]
+
+\[
+    \varepsilon(x) = \left({x - \frac{1}{2}}\right)d_1 + \left({x + \frac{1}{2}}\right)d_2
+\]
+
+\problempart{b}
+
+\[
+    [K] = \int_\volume [B]^T [E] [B] \dd \volume
+\]
+
+\[
+    A = \dd z \dd y
+\]
+
+\[
+    [K] = \int [B]^T [E] [B] A \dd x
+\]
+
+\[
+    [K] = AE \int [B]^T [B] \dd x
+\]
+
+\[
+    [B]^T [B] = 
+    \mqty[\left({x^2-x+\frac{1}{4}}\right) & \left({x^2 - \frac{1}{4}}\right) \\ \left({x^2 - \frac{1}{4}}\right) & \left({x^2+x+\frac{1}{4}}\right)]
+\]
+
+\[
+    \int [B]^T [B] \dd x = 
+    \mqty[\left({\frac{x^3}{3} - \frac{x^2}{2} + \frac{x}{4}}\right) & \left({\frac{x^3}{3} - \frac{x}{4}}\right) \\ \left({\frac{x^3}{3} - \frac{x}{4}}\right) & \left({\frac{x^3}{3} + \frac{x^2}{2} + \frac{x}{4}}\right)]
+\]
+
+\[
+    [K] = AE \mqty[\left({\frac{x^3}{3} - \frac{x^2}{2} + \frac{x}{4}}\right) & \left({\frac{x^3}{3} - \frac{x}{4}}\right) \\ \left({\frac{x^3}{3} - \frac{x}{4}}\right) & \left({\frac{x^3}{3} + \frac{x^2}{2} + \frac{x}{4}}\right)]
+\]
+
+\[
+    \boxed{
+    [K] = \frac{AE}{12} \mqty[\left({4x^3 - 6x^2 + 3x}\right) & \left({4x^3-3x}\right) \\ \left({4x^3-3x}\right) & \left({4x^3 + 6x^2 + 3x}\right)]
+    }
+\]
+
+\problempart{c}
+
+If we say that node 1 is at an \(x\) location of \(x=-1\) and node 2 is at an \(x\) location of \(x=1\), we see the following behavior of the shape functions:
+
+\[
+    N_1(x_1=-1) =  \frac{-(-1)(1-(-1))}{2} \quad\quad N_2(x_1=-1) = \frac{(-1)(1+(-1))}{2}
+\]
+\[
+    N_1(x_1=-1) =  1 \quad\quad N_2(x_1=-1) = 0
+\]
+
+\[
+    N_1(x_2=1) =  \frac{-(1)(1-(1))}{2} \quad\quad N_2(x_2=1) = \frac{(1)(1+(1))}{2}
+\]
+\[
+    N_1(x_2=1) = 0 \quad\quad N_2(x_2=1) = 1
+\]
+
+The shape functions are equal to 1 at the node they are associated with and 0 at the other node.
+This is a valid shape function for these coordinates.
+However, if the node coordinates were different then the shape functions would need to be reformulated to ensure this behavior.
+
+\end{document}

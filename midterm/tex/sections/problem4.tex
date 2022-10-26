@@ -1,0 +1,35 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\problem{4}
+
+Concerning FEA models wih 3-node triangular and 4-node rectangular elements:
+
+\begin{enumerate}[label=\alph*)]
+    \item Using words and/or equations, explain why these elements perform poorly in bending.
+    \item Does ``refining the mesh'' (adding more of these elements) improve the performance of models with these elements? Explain.
+    \item What other approach can be taken to improve the performance of these models? Explain.
+\end{enumerate}
+
+\problempart{a}
+
+\textbf{ADD MORE ADD MORE ADD MORE}
+3-node triangular elements are known as linear strain triangles.
+These elements cause a model to appear overly stiff in bending, requiring a larger-than-realistic moment to generate appropriate bending deflections.
+
+
+\problempart{b}
+\textbf{ADD MORE ADD MORE ADD MORE}
+Refining a mesh made up of 3-node triangles and/or 4-node rectangles can improve the accuracy of the model with respect to stiffness and internal strain.
+However, there is a computational cost that goes hand-in-hand with refining the mesh in this way.
+
+\problempart{c}
+
+\textbf{ADD MORE ADD MORE ADD MORE}
+Adding nodes in between existing nodes on the triangular and rectangular elements transforms the elements from linear strain elements to \textbf{SOMETHING ELSE}.
+For the same number of elements, the accuracy with these new elements is significantly greater.
+However, there is still an added computational cost from the extra nodes.
+Generally, this cost is small compared to the cost of refinement using solely 3 and 4-node elements.
+
+\end{document}

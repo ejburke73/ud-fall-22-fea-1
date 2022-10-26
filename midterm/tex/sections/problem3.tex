@@ -1,0 +1,180 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\problem{3}
+
+The potential energy for a simply supported beam under uniform distributed load is
+
+\[
+    \Pi = \int_0^H \left[{\frac{EI}{2}\left({\frac{\dd y}{\dd x}}\right)^2 + \left({\frac{Wx(H-x)}{2}y}\right)}\right] \dd x
+\]
+
+in which \(y\) is the transverse deflection of the beam, \(W\) is the transverse distributed load, \(E\), \(I\), and \(H\) are constants independent of \(x\) %
+and the boundary conditions are \(y(0) = 0\) and \(y(H)=0\).
+
+\begin{enumerate}[label=\alph*)]
+    \item Use the Euler equation to solve for the deflection equation \(y(x)\) of the beam.
+    \item If we were to set \(\delta \Pi = 0\), the result would be the Euler equation plus the boundary term 
+    \[
+        \left.{y'\delta y}\right|_0^H = 0
+    \]
+    What does this boundary term tell us about the boundary conditions that must exist at the ends of the beam?
+\end{enumerate}
+
+\problempart{a}
+
+\solution{}
+
+Euler's Equation for a functional of the form \(I = \int_{x_1}^{x_2} f(x,y,y')\dd x = \textrm{minimum}\):
+
+\[
+    \pdv{f}{y} - \dv{x}\left({\pdv{f}{y'}}\right) = 0
+\]
+
+Expressing the given potential energy function in terms of \(x, y, \,\textrm{and}\,y'\):
+
+\[
+    \Pi = \int_0^H \left[{\frac{EI}{2}\left({y'}\right)^2 + \left({\frac{Wx(H-x)}{2}y}\right)}\right] \dd x
+\]
+
+\[
+    f(x,y,y') = \left[{\frac{EI}{2}\left({y'}\right)^2 + \left({\frac{Wx(H-x)}{2}y}\right)}\right]
+\]
+
+\[
+    \pdv{f}{y} = \left({\frac{Wx(H-x)}{2}}\right)
+\]
+
+\[
+    \dv{x}\left({\pdv{f}{y'}}\right) = \left[{
+    \pdv{f}{y'}{x} + \pdv{f}{y'}{y} y' + \pdv[2]{f}{{y'}} y''
+    }\right]
+\]
+
+\[
+    \pdv{f}{y'} = EIy'
+\]
+
+\[
+    \dv{x}\left({\pdv{f}{y'}}\right) = %
+    EIy''
+\]
+
+\[
+    \pdv{f}{y} - \dv{x}\left({\pdv{f}{y'}}\right) = 0
+\]
+
+\[
+    \left({\frac{Wx(H-x)}{2}}\right) - EIy'' = 0
+\]
+
+\[
+    y'' = \left({\frac{Wx(H-x)}{2EI}}\right)
+\]
+
+\[
+    y'' = \frac{W}{2EI} \left({Hx-x^2}\right)
+\]
+
+\[
+    y' =  \frac{W}{2EI} \left({\frac{Hx^2}{2} - \frac{x^3}{3}}\right) + C
+\]
+
+\[
+    y =  \frac{W}{2EI} \left({\frac{Hx^3}{6} - \frac{x^4}{12}}\right) + Cx + D
+\]
+
+\[
+    y(0) = 0 \rightarrow 0 = D
+\]
+
+\[
+    y(H) = 0 \rightarrow 0 =  \frac{W}{2EI} \left({\frac{H(H)^3}{6} - \frac{H^4}{12}}\right) + CH
+\]
+
+\[
+    0 =  \frac{W}{24EI} \left({2H^4 - H^4}\right) + CH
+\]
+
+\[
+    C =  -\frac{WH^3}{24EI}
+\]
+
+\[
+    y =  \frac{W}{2EI} \left({\frac{Hx^3}{6} - \frac{x^4}{12}}\right) -\frac{WH^3}{24EI} x
+\]
+
+\[  
+    \boxed{
+    y(x) =  \frac{W}{24EI} \left({2Hx^3 - x^4 - H^3 x}\right)
+    }
+\]
+
+Check boundary conditions:
+
+\[
+    y(0) =  \frac{W}{24EI} \left({2Hx^3 - x^4 - H^3 x}\right) = 0 \checkmark    
+\]
+
+\[
+    y(H) =  \frac{W}{24EI} \left({2H^4 - H^4 - H^4}\right) = 0 \checkmark
+\]
+
+\problempart{b}
+
+Setting  \(\delta \Pi = 0\):
+
+\[
+    \left.{y'\delta y}\right|_0^H = 0
+\]
+
+\[
+    (y'(H)-y'(0))\delta y = 0  
+\]
+Either:
+\[
+    y'(H) - y'(0) = 0 
+\]
+
+Or:
+
+\[
+    \delta y(H) - \delta y (0) = 0
+\]
+
+Examining the first case at \(x=0\) and \(x=H\). 
+
+\[
+    y(x) =  \frac{W}{24EI} \left({2Hx^3 - x^4 - H^3 x}\right)
+\]
+
+\[
+    y'(x) =  \frac{W}{24EI} \left({6Hx^2 - 4x^3 - H^3}\right)
+\]
+
+\[
+    y'(0) = y'(H)
+\]
+
+\[
+    \left({6H(0)^2 - 4(0)^3 - H^3}\right) = \left({6H(H)^2 - 4(H)^3 - H^3}\right)
+\]
+
+\[
+    -H^3 = H^3 \quad \times
+\]
+
+This cannot be true, therefore the alternative case must be true:
+
+\[
+    \delta y(H) - \delta y (0) = 0
+\]
+
+\[
+    \delta y(H) = \delta y (0)
+\]
+
+At both ends of the beam \(y\) must equal 0, which agrees with our initially given boundary conditions. 
+
+\end{document}
