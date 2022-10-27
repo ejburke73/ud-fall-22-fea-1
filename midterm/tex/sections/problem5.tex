@@ -4,7 +4,12 @@
 
 \problem{5}
 
-Consider the bar loaded as shown in figure \ref{}.
+Consider the bar loaded as shown below:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.9]{../../images/problem_5/setup}
+\end{figure}
 
 Assume \(E=200\,\unit{\giga\pascal}\) and that the bar is fixed at both ends.
 
@@ -15,6 +20,8 @@ Assume \(E=200\,\unit{\giga\pascal}\) and that the bar is fixed at both ends.
     \item Plot the displacements \(u(x)\) vs. \(x\) for the entire bar.
     \item What are the reaction forces at the two ends?
 \end{enumerate}
+
+\textit{Note: All calculations performed in MATLAB. See appendix \ref{Problem4MATLAB} for details.}
 
 \problempart{a}
 
@@ -27,6 +34,8 @@ The model has 4 elements and 5 nodes, with the known tractions, forces, and boun
     \caption{1D linear bar finite element model of bar.}
     \label{fea_bar}
 \end{figure}
+
+\newpage
 
 \problempart{b}
 
@@ -187,10 +196,45 @@ Substituting in given values and solving in MATLAB yields the following for \(\{
 
 \problempart{d}
 
-some ldkjfhsdlkfjhdslkjfhdskljfhdskl \textbf{MORE HERE MORE HERE MORE HERE}
-dfgdf
-dfgdf
-dfgdf
+Following a similar solution procedure as in Problem 2 we solve for displacement, \(u(x)\), in MATLAB.
+Note, values are not shown for legibility:
+
+\[
+    u = a_1 + a_2x + a_3x^2 + a_4 x^3 + a_5 x^4
+\]
+
+\[
+    \begin{Bmatrix}
+        u_1 \\ u_2 \\u_3 \\ u_4 \\u_5
+    \end{Bmatrix}
+     = [A]
+     \begin{Bmatrix}
+        1 \\ x \\x^2 \\x^3 \\x^4
+    \end{Bmatrix}
+\]
+
+\[
+    A = \mqty[
+        1 & x_1 & x_1^2 & x_1^3 & x_1^4\\
+        1 & x_2 & x_2^2 & x_2^3 & x_2^4\\
+        1 & x_3 & x_3^2 & x_3^3 & x_3^4\\
+        1 & x_4 & x_4^2 & x_4^3 & x_4^4\\
+        1 & x_5 & x_5^2 & x_5^3 & x_5^4\\
+    ]
+\]
+
+\[
+    \mqty[N_1 & N_2 & N_3 & N_4 & N_5] = \mqty[1 & x & x^2 & x^3 & x^4] [A]^{-1}
+\]
+
+\[
+    \{u\} = [N]\{d\}
+\]
+
+Figure \ref{u_vs_x} shows the displacement \(u\) across the finite element bar model.
+Nodes 1-5 are marked with a red star.
+The curve obeys the given boundary conditions with \(u(x_1) = u(x_5) = 0\).
+
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=1]{../../images/problem_5/u_vs_x.png}
@@ -198,9 +242,11 @@ dfgdf
     \label{u_vs_x}
 \end{figure}
 
+\newpage
+
 \problempart{e}
 
-Solving the global  \([K]\{d\} = \{r\}\) equation in MATLAB yields the following for \(\{r\}\):
+Solving the global \([K]\{d\} = \{r\}\) equation in MATLAB yields the following for \(\{r\}\):
 
 \[
     \{r\} =
