@@ -1,0 +1,51 @@
+\documentclass[12pt,letterpaper]{article}
+
+\setcounter{secnumdepth}{2}
+
+\usepackage{preamble}
+
+\iffalse
+\usepackage{draftwatermark}
+\SetWatermarkAngle{45}
+\SetWatermarkScale{1.75}
+\SetWatermarkColor{red!15}
+\SetWatermarkFontSize{42pt}
+\SetWatermarkText{\shortstack{\bfseries\sffamily DRAFT! \\ [1em] \bfseries\sffamily DRAFT! \\ [1em ]\bfseries\sffamily DRAFT! }}
+\fi
+
+% Edit these as appropriate
+\author{Evan Burke}
+\newcommand\assignmentname{Finite Element Analysis of a Torque Arm}
+\title{\assignmentname{}}
+\newcommand\coursenumber{AEE 546}
+\newcommand\coursename{Finite Element Analysis I}
+\newcommand\instructor{Dr. Thomas Whitney}
+\newcommand\studentID{101318838}   
+     
+\begin{document}
+
+	\graphicspath{{images}{../images/problem_2}}
+
+	\input{title.tex}
+	
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	
+	%\newpage \subfile{sections/nomenclature}
+	
+    \newpage \subfile{sections/introduction}
+
+	\subfile{sections/convergence}
+
+	\subfile{sections/results}
+
+	\subfile{sections/redesign}
+
+	\subfile{sections/conclusions}
+
+	\clearpage
+
+	\subfile{sections/appendix}
+		
+\end{document}

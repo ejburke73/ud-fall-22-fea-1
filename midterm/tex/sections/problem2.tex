@@ -17,7 +17,7 @@ The physical node locations and nodal displacement values are shown in table \re
     \centering
     \begin{tabular}{|c|c|c|c|c|c|}
     \hline
-    \multicolumn{2}{|c|}{\textbf{Node 1}} & \multicolumn{2}{c|}{\textbf{Node 2}} & \multicolumn{2}{l|}{\textbf{Node 3}} \\ \hline
+    \multicolumn{2}{|c|}{\textbf{Node 1}} & \multicolumn{2}{c|}{\textbf{Node 2}} & \multicolumn{2}{c|}{\textbf{Node 3}} \\ \hline
     \(x_1\) & \(d_1\) & \(x_2\) & \(d_2\) & \(x_3\) & \(d_3\) \\ \hline
     2 in. & 0.15 in. & 4 in. & 0.05 in. & 6 in. & -0.10 in. \\\hline
     \end{tabular}
@@ -28,6 +28,10 @@ The physical node locations and nodal displacement values are shown in table \re
 Find the physical location (\(x=\)) on the element where the displacement is zero.
 
 \solution{}
+
+\textit{Note: Matrix calculations and plotting performed in MATLAB, see appendix \ref{Problem2MATLAB}.}
+
+The displacement of the element as a function of \(x\) is given by the following second-order equation:
 
 \[
     u = a_1 + a_2x + a_3x^2
@@ -57,6 +61,8 @@ Find the physical location (\(x=\)) on the element where the displacement is zer
     ]
 \]
 
+Shape functions for the element can be found using the relation below:
+
 \[
     [N] = \mqty[1 & x & x^2][A]^{-1}
 \]
@@ -78,9 +84,13 @@ Find the physical location (\(x=\)) on the element where the displacement is zer
     ]
 \]
 
+The final shape functions for the element:
+
 \[
     \mqty[N_1 & N_2 & N_3] = \mqty[\left({\frac{x^2}{8}-\frac{5x}{4}+ 3}\right) & \left({-\frac{x^2}{4}+2x-3}\right) & \left({\frac{x^2}{8}-\frac{3x}{4}+1}\right)]
 \]
+
+The displacement field for the element can be found using the following relation between shape functions and known nodal degrees of freedom:
 
 \[
     \{u\} = [N]\{d\}
@@ -93,15 +103,21 @@ Find the physical location (\(x=\)) on the element where the displacement is zer
     \end{Bmatrix}
 \]
 
+The following equation defines displacement along the element as a function of \(x\) location:
+
 \[
     u = -\frac{x^2}{160} - \frac{x}{80} + \frac{1}{5}
 \]
+
+The coordinate of the element where there is no displacement is \(x=4.7445\,\unit{in}\).
 
 \[
     \boxed{
     u(x=4.7445) = 0
     }
 \]
+
+Figure \ref{deflection_plot} shows the element displacement versus \(x\)-location with the point of zero-displacement annotated.
 
 \begin{figure}[h!]
     \centering

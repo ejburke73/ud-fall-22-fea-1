@@ -1,0 +1,47 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+	\begin{appendices}
+		\section{References}
+		\label{References}
+		Cook, Robert D., Malkus, David S., Plesha, Michael E. and Witt, Robert J.. Concepts and Applications of Finite Element Analysis, 4th Edition. 4 : Wiley, 2001.
+
+		Whitney, Thomas. Finite Element Analysis I - AEE 546 Lectures, Fall 2022.
+
+		ABAQUS Online Documentation: Version 6.6-1
+
+		\clearpage
+		\section{Safety Factor Calculation}
+		\label{safety}
+
+		The Gerber equation with safety factors included:
+
+		\[
+			\frac{n_s \sigma_{cyc}}{\sigma_e} + \left({ \frac{n_s\sigma_{mean}}{\sigma_y}}\right)^2 = 1
+		\]
+
+		From the redesigned part:
+
+		\begin{align*}
+			&\sigma_{cyc} = 28.29 \,\unit{\mega\pascal}\\
+			&\sigma_e = 30 \,\unit{\mega\pascal}\\
+			&\sigma_{mean} = 11.62\,\unit{\mega\pascal}\\
+			&\sigma_y = 75 \,\unit{\mega\pascal}
+		\end{align*}
+
+		Substituting in and generating a quadratic in terms of \(n_s\):
+
+		\[
+			0.9463 n_s + 0.024 n_s^2 = 1
+		\]
+
+		Solving for the positive value of \(n_s\):
+
+		\[
+			n_s = 1.02984	
+		\]
+
+	\end{appendices}
+
+\end{document}

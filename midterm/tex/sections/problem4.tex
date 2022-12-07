@@ -14,22 +14,42 @@ Concerning FEA models wih 3-node triangular and 4-node rectangular elements:
 
 \problempart{a}
 
-\textbf{ADD MORE ADD MORE ADD MORE}
-3-node triangular elements are known as linear strain triangles.
+3-node triangular elements are known as constant strain triangles (CSTs).
 These elements cause a model to appear overly stiff in bending, requiring a larger-than-realistic moment to generate appropriate bending deflections.
+A mesh made up of CSTs can ``lock up'' to where the model appears to not bend at all.
+CSTs are unable to accurately represent stresses and strains and also generate false shear strains which ``absorb'' internal energy and cause the spurious stiffnesses observed in models using these elements.
 
+A 4-node rectangle, known as a Q4, experiences similar defects to the CST.
+Q4 elements also fail to accurately represent bending, due to a spurious shear strain.
+The shear strain that appears even in a plane strain model using Q4s absorbs internal energy so that for a prescribed bending deformation, the moment required to generate said deformation is greater than the correct value.
+
+For Q4 elements, given an applied bending moment of \(M_b\), the following relationship occurs:
+
+\[
+    \frac{\theta_{element}}{\theta_{bending}}
+    =
+    \frac{1-\nu^2}{1+ \frac{1-\nu}{2}(\frac{a}{b})^2}
+\]
+
+As the aspect ratio (\(\frac{a}{b}\)) increases for a Q4 element, the ratio of rotations tends to 0 and the element locks up. 
 
 \problempart{b}
-\textbf{ADD MORE ADD MORE ADD MORE}
+
 Refining a mesh made up of 3-node triangles and/or 4-node rectangles can improve the accuracy of the model with respect to stiffness and internal strain.
 However, there is a computational cost that goes hand-in-hand with refining the mesh in this way.
+In any model, the larger the number of notes, the longer it takes for a solution to be found. 
+For highly-refined models made up of CSTs or Q4s, the elements may ``lock up'' or experience shear locking, as noted in part (a).
+The rate of convergence for highly dense models using these elements is slow, computationally expensive, and an inefficient use of resources.
 
 \problempart{c}
 
-\textbf{ADD MORE ADD MORE ADD MORE}
-Adding nodes in between existing nodes on the triangular and rectangular elements transforms the elements from linear strain elements to \textbf{SOMETHING ELSE}.
-For the same number of elements, the accuracy with these new elements is significantly greater.
-However, there is still an added computational cost from the extra nodes.
+A method of improvement for the CSTs and Q4s is to add nodes in between the existing nodes.
+This transformation yields linear strain triangles (LSTs) and Q8 elements.
+LSTs and Q8s are significantly more accurate than CSTs and Q4s; for a given tolerance, the new elements can take advantage of a much coarser mesh.
+For the same number of elements, the new element types are more computationally expensive due to the increased node count.
 Generally, this cost is small compared to the cost of refinement using solely 3 and 4-node elements.
+The tradeoff between reduced node count and element complexity demonstrated here emphasizes the importance of understanding modeling assumptions and limitations for any finite element analysis problem.
+
+Source: \textit{Cook, Robert D., Malkus, David S., Plesha, Michael E. and Witt, Robert J.. Concepts and Applications of Finite Element Analysis, 4th Edition. 4 : Wiley, 2001.}
 
 \end{document}

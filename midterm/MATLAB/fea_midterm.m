@@ -65,7 +65,7 @@ simplify(y)
 %% Problem 5
 clear; close; clc;
 
-E = 200*1000; % GPa >>>>>>>>>>>>>>>>>>>check these units!!!
+E = 200*1000; % MPa
 P = 5000; % N
 Tx = 250; % N/mm
 A1 = 50; A2 = 50; % mm^2

@@ -21,30 +21,45 @@ The resulting displacement field is \(u = N_1d_1 + N_2d_2\).
 \problempart{a}
 
 \solution{}
+\textit{Note: Matrix inversions performed in MATLAB, see appendix \ref{Problem1MATLAB}.}
+
+The displacement vector for an element is given by the shape functions times the nodal displacement degrees of freedom of the element:
 
 \[
     \{u\} = [N]\{d\}
 \]
 
+The strain vector for an element is defined as:
+
 \[
     \{\varepsilon\} = [\partial]\{u\}
 \]
+
+Substituting in the definition of the displacement vector:
 
 \[
     \{\varepsilon\} = [\partial][N]\{d\}
 \]
 
+The \([B]\) matrix is defined as the derivative of the shape functions, \([N]\):
+
 \[
     [B] = [\partial][N]
 \]
+
+Substituting again:
 
 \[
     \{\varepsilon\} = [B]\{d\}
 \]
 
+The shape functions defined in the problem statement can be expressed as:
+
 \[
     [N] = [N_1\, N_2] = \mqty[\frac{-x(1-x)}{2} & \frac{x(1+x)}{2}]
 \]
+
+Calculating the \([B]\) matrix:
 
 \[
     [B] = [\pdv{x}]\mqty[\frac{-x(1-x)}{2} & \frac{x(1+x)}{2}]
@@ -55,6 +70,8 @@ The resulting displacement field is \(u = N_1d_1 + N_2d_2\).
     [B] = \mqty[x - \frac{1}{2} & x + \frac{1}{2}]
     }
 \]
+
+Substituting in the known \([B]\) matrix into the \(\varepsilon\) equation:
 
 \[
     \{\varepsilon\} = \mqty[x - \frac{1}{2} & x + \frac{1}{2}]
@@ -69,9 +86,13 @@ The resulting displacement field is \(u = N_1d_1 + N_2d_2\).
 
 \problempart{b}
 
+For a given element, the stiffness matrix \([K]\) is defined by:
+
 \[
     [K] = \int_\volume [B]^T [E] [B] \dd \volume
 \]
+
+Noting that \(\dd \volume = \dd x \dd y \dd z\):
 
 \[
     A = \dd z \dd y
@@ -80,6 +101,8 @@ The resulting displacement field is \(u = N_1d_1 + N_2d_2\).
 \[
     [K] = \int [B]^T [E] [B] A \dd x
 \]
+
+Assuming \(A\) and \(E\) to be constant across the element and solving:
 
 \[
     [K] = AE \int [B]^T [B] \dd x
@@ -106,8 +129,8 @@ The resulting displacement field is \(u = N_1d_1 + N_2d_2\).
 \]
 
 \problempart{c}
-
-If we say that node 1 is at an \(x\) location of \(x=-1\) and node 2 is at an \(x\) location of \(x=1\), we see the following behavior of the shape functions:
+No information is given regarding the size, position, or orientation of the element.
+If we make the assumption that node 1 is at an \(x\) location of \(x=-1\) and node 2 is at an \(x\) location of \(x=1\), we see the following behavior of the shape functions:
 
 \[
     N_1(x_1=-1) =  \frac{-(-1)(1-(-1))}{2} \quad\quad N_2(x_1=-1) = \frac{(-1)(1+(-1))}{2}
@@ -126,5 +149,6 @@ If we say that node 1 is at an \(x\) location of \(x=-1\) and node 2 is at an \(
 The shape functions are equal to 1 at the node they are associated with and 0 at the other node.
 This is a valid shape function for these coordinates.
 However, if the node coordinates were different then the shape functions would need to be reformulated to ensure this behavior.
+The validity of shape functions is highly dependent on the assumptions that are foundational to the element definition.
 
 \end{document}

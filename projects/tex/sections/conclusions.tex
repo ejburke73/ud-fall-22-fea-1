@@ -1,0 +1,18 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Summary and Conclusions}
+
+We modeled a torque arm in the finite element software \textit{Abaqus} using a 2D plane stress approach to evaluate the potential for failure in yield and fatigue from a constant axial preload and an oscillating vertical load.
+The baseline model was shown to fail both in yield and in fatigue with critical regions located at the right side of the center gap in the torque arm.
+Failure in yield was evaluated using the combined Von Mises stresses from the axial preload while failure in fatigue was evaluated using the Gerber equation to look at the impact of a mean load and oscillating load on the part.
+By increasing the thicknesses of the torque arm by a factor of 5, the part no longer fails by yield or fatigue.
+The redesigned torque arm experiences reduced peak stresses compared to the baseline model and is over-designed for yield failure but has a peak Gerber value of 0.97, 3\% below the fatigue failure criteria.
+
+We made several critical assumptions in the process of modeling the torque arm and its loads, namely the choice to use a plane stress model, the discontinous thicknesses in the part geometry, and the method of applying loads via general tractions.
+The part could have been modeled in 3D space at a higher computational cost with more complex element requirements, but for our purposes using the 8-node quadratic quadrilateral elements was sufficient to capture the peak stresses of interest.
+By carrying out a mesh resolution study, we feel confident having captured the critical stresses of interest both for the baseline and redesigned parts.
+The encastre boundary condition on the left hole of the torque arm is potentially overly constrained but because the critical stresses are not experienced near that boundary region, we can again neglect the finer details of stresses near the boundary condition.
+
+\end{document}
